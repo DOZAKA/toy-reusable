@@ -15,9 +15,14 @@ permissions:
 
 env:
   MODULE_NAME: storage-account
-  MODULE_REGISTRY_SERVER: # To be added.
+  MODULE_REGISTRY_SERVER: registrydbk.azurecr.io
   MODULE_FILE_PATH: modules/storage-account/main.bicep
   MODULE_METADATA_FILE_PATH: modules/storage-account/metadata.json
 
 jobs:
-  # To be added.
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Run Bicep linter
+      run: az bicep build --file ${{ env.MODULE_FILE_PATH }}
